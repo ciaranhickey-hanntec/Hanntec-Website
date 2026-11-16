@@ -1,4 +1,4 @@
-# Hanntec Engineering website (draft 2)
+﻿# Hanntec Engineering website (draft 2)
 
 Plain HTML, CSS and a little JavaScript. No build step, no framework, and it can be hosted anywhere.
 Open `index.html` in a browser to view it. If fonts look plain when opened by double-click, view it through any simple web server instead.
@@ -62,7 +62,7 @@ Yellow and grey notes on the pages mark things to finish. The **Draft notes** bu
 
 - Dark hero with a drawing of a plant that draws itself in on load. Add `hero.jpg` or `hero.mp4` and it is replaced by your own media.
 - Colours come from the logo: blue `#0B3A82` and red `#C8142F` (the logo red, brightened so it reads on dark). They are the first lines of `assets/css/styles.css`.
-- The header is transparent over the dark hero and turns white once you scroll. `logo-white.png` is used over dark areas and `logo.png` over white.
+- The header is transparent over the dark hero and turns white once you scroll. `logo-on-dark.png` (red H, lighter blue wordmark) is used over dark areas and `logo.png` (original colours) over white.
 - The red rounded square on inner page headers and team portraits echoes the boxed H in the logo.
 - Fonts are Barlow Condensed (headlines) and Instrument Sans (body), both open licence, stored in `assets/fonts/`, so no Google Fonts requests are made.
 - The before/after slider artwork is the same plant as the hero, drawn two ways, so the "drawing" and "built" sides match.
