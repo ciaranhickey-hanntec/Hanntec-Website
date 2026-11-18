@@ -26,7 +26,7 @@ Every photo slot shows a blueprint-style placeholder until a file with the right
 | --- | --- |
 | Hero photo (replaces the drawing) | `assets/img/hero/hero.jpg` (wide, about 2400 px) |
 | Hero video (replaces the drawing) | `assets/video/hero.mp4` (short, silent, looping, under 8 MB) |
-| Before/after slider | Already added (`hero/before.jpg`, `hero/after.jpg`, 16:10, same framing so the hoarding sign lines up). To change it, replace both with new photos framed the same way |
+| Before/after slider | Already added (`hero/before.jpg`, `hero/after.jpg`, 1900x980, each showing the whole building, with the fence line at the same height). To change it, replace both with photos framed the same way |
 | Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
 | Sector tiles and sector pages | Already added (7 photos in ``sectors/``, named after each sector). Swap for sharper or own photos any time |
 | Team portraits (square, face centred) | `assets/img/team/jack-walshe.jpg`, `jackie-barden.jpg`, `niamh-kelly.jpg`, `aidan-armstrong.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` |
@@ -62,5 +62,5 @@ Yellow and grey notes on the pages mark things to finish. The **Draft notes** bu
 - The header is transparent over the dark hero and turns white once you scroll. `logo-on-dark.png` (red H, lighter blue wordmark) is used over dark areas and `logo.png` (original colours) over white.
 - The red rounded square on inner page headers and team portraits echoes the boxed H in the logo.
 - Fonts are Barlow Condensed (headlines) and Instrument Sans (body), both open licence, stored in `assets/fonts/`, so no Google Fonts requests are made.
-- The before/after slider uses two photos of the same building, lined up on the hoarding sign, with a soft blended edge and an eased divider.
+- The before/after slider is full width and uses two photos that each show the whole building, lined up on the fence line, with a soft blended edge and an eased divider.
 - `logo.png` is the supplied logo with a transparent background. The original is only 446 px wide, so a larger file or SVG would be sharper.
