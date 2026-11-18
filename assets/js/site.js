@@ -123,9 +123,49 @@
     var el = $('[data-reveal]');
     if (!el) return;
     var input = $('input[type="range"]', el);
-    function set(v) { el.style.setProperty('--pos', v + '%'); }
-    input.addEventListener('input', function () { set(Number(input.value)); });
-    set(Number(input.value));
+    var FEATHER = 6;                       // must match --feather in the stylesheet (percent)
+    var cur = reduceMotion ? 50 : 100;     // starts showing the "before" photo, then sweeps to the middle
+    var target = cur, raf = 0, touched = false;
+
+    function apply(p) {
+      el.style.setProperty('--pos', p.toFixed(2) + '%');
+      // the soft edge travels slightly beyond 0 and 100 so each photo can be shown completely
+      el.style.setProperty('--c', (-FEATHER + p * (100 + 2 * FEATHER) / 100).toFixed(2) + '%');
+    }
+    function loop() {
+      var d = target - cur;
+      if (Math.abs(d) < 0.05) { cur = target; apply(cur); raf = 0; input.value = Math.round(target); return; }
+      cur += d * 0.14;                     // eased follow: the divider glides to where you point
+      apply(cur);
+      raf = requestAnimationFrame(loop);
+    }
+    function go(t) {
+      target = Math.max(0, Math.min(100, t));
+      if (reduceMotion) { cur = target; apply(cur); input.value = Math.round(target); return; }
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+
+    input.addEventListener('input', function () { touched = true; go(Number(input.value)); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      touched = true;
+      go(target + (e.key === 'ArrowRight' ? 8 : -8));
+    });
+
+    apply(cur);
+    input.value = Math.round(cur);
+    // one gentle sweep the first time the slider scrolls into view
+    if (!reduceMotion && window.IntersectionObserver) {
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        setTimeout(function () { if (!touched) go(50); }, 400);
+      }, { threshold: 0.55 });
+      io.observe(el);
+    } else {
+      go(50);
+    }
   })();
 
   /* ---------- Team profiles ---------- */

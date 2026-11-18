@@ -310,10 +310,15 @@ button { font: inherit; }
 /* ---------- Before / after ---------- */
 .compare-wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
 .compare-text .lead { margin-bottom: 1.4em; }
-.compare { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--r); background: var(--blue); --pos: 50%; }
+.compare { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r); background: var(--navy-900); --pos: 50%; --c: 50%; --feather: 6%; }
 .compare__layer { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .compare__after { background-image: url("../img/hero/after.jpg"), url("../img/hero/after.svg"); }
-.compare__before { background-image: url("../img/hero/before.jpg"), url("../img/hero/before.svg"); clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+/* The "before" photo is revealed through a soft-edged mask, so the two photos blend instead of cutting */
+.compare__before {
+  background-image: url("../img/hero/before.jpg"), url("../img/hero/before.svg");
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--c) - var(--feather)), transparent calc(var(--c) + var(--feather)));
+  mask-image: linear-gradient(90deg, #000 calc(var(--c) - var(--feather)), transparent calc(var(--c) + var(--feather)));
+}
 .compare__bar { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; background: #fff; }
 .compare__handle { position: absolute; top: 50%; left: var(--pos); width: 52px; height: 52px; margin: -26px 0 0 -26px; display: grid; place-items: center; color: var(--blue); background: #fff; border-radius: 50%; box-shadow: 0 2px 14px rgba(4, 18, 43, .4); }
 .compare__handle .icon { width: 26px; height: 26px; }
