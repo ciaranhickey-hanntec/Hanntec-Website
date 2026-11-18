@@ -28,7 +28,7 @@ Every photo slot shows a blueprint-style placeholder until a file with the right
 | Hero video (replaces the drawing) | `assets/video/hero.mp4` (short, silent, looping, under 8 MB) |
 | Before/after slider | `assets/img/hero/before.jpg`, `assets/img/hero/after.jpg` (4:3, same framing for both) |
 | Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
-| Sector tiles and sector pages | `assets/img/sectors/food-beverage.jpg`, `agriculture.jpg`, `construction.jpg`, `energy.jpg`, `life-sciences.jpg`, `hospitality.jpg`, `healthcare.jpg` |
+| Sector tiles and sector pages | Already added (7 photos in ``sectors/``, named after each sector). Swap for sharper or own photos any time |
 | Team portraits (square, face centred) | `assets/img/team/jack-walshe.jpg`, `jackie-barden.jpg`, `niamh-kelly.jpg`, `aidan-armstrong.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` |
 
 Photos should be about 1600 px wide and under 400 KB each. Text sits on a dark fade at the bottom of each tile, so most photos work. Add descriptive `alt` text in the HTML when a real photo replaces a placeholder.
