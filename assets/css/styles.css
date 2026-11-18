@@ -1,4 +1,4 @@
-﻿/* Hanntec Engineering website
+/* Hanntec Engineering website
    Colours come from the logo. Edit the tokens below to retheme. */
 
 @font-face { font-family: "Barlow Condensed"; src: url("../fonts/barlow-condensed-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
@@ -261,17 +261,59 @@ button { font: inherit; }
 .svc__label { position: absolute; z-index: 3; left: 16px; top: 12px; margin: 0; color: rgba(255, 255, 255, .7); }
 @media (max-width: 760px) { .svc-grid { grid-template-columns: minmax(0, 1fr); } .svc { min-height: 280px; } }
 
+/* Five delivery tiles: three on the first row, two on the second */
+.svc-grid--five { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.svc-grid--five .svc { grid-column: span 2; }
+.svc-grid--five .svc:nth-child(n+4) { grid-column: span 3; }
+.svc--sm { min-height: clamp(250px, 24vw, 320px); padding: clamp(20px, 2.4vw, 30px); }
+.svc--sm .svc__title { font-size: clamp(1.75rem, 2.5vw, 2.25rem); }
+.svc--sm .svc__text { font-size: 1.0625rem; }
+@media (max-width: 900px) {
+  .svc-grid--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .svc-grid--five .svc, .svc-grid--five .svc:nth-child(n+4) { grid-column: auto; }
+  .svc-grid--five .svc:last-child { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .svc-grid--five { grid-template-columns: minmax(0, 1fr); }
+  .svc-grid--five .svc:last-child { grid-column: auto; }
+}
+.section__head--sub { margin-top: clamp(56px, 8vw, 104px); }
+
+/* ---------- The two lead services ---------- */
+.lead-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.leadcard {
+  position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start;
+  padding: clamp(28px, 3.6vw, 52px); color: #fff; text-decoration: none; border-radius: var(--r);
+  background-color: var(--navy-900);
+  background-image:
+    radial-gradient(520px 360px at 100% 0%, rgba(30, 100, 210, .38), transparent 70%),
+    linear-gradient(rgba(141, 184, 247, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(141, 184, 247, .07) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+}
+.leadcard::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 6px; background: var(--red); }
+.leadcard__icon { width: 56px; height: 56px; margin-bottom: 28px; color: var(--sky); stroke-width: 1.4; }
+.leadcard__title { font: 700 clamp(2.5rem, 4.4vw, 3.75rem)/.98 var(--font-display); text-wrap: balance; }
+.leadcard__text { margin-top: 12px; font-size: clamp(1.1875rem, 1.6vw, 1.375rem); line-height: 1.45; color: rgba(255, 255, 255, .92); }
+.leadcard__points { display: grid; gap: 10px; width: 100%; margin: 28px 0 30px; padding-top: 26px; border-top: 1px solid rgba(255, 255, 255, .22); }
+.leadcard__points span { position: relative; padding-left: 26px; color: rgba(255, 255, 255, .92); }
+.leadcard__points span::before { content: ""; position: absolute; left: 0; top: .62em; width: 12px; height: 3px; background: #FF4B64; border-radius: 2px; }
+.leadcard .svc__more { margin-top: auto; }
+.leadcard:hover .svc__more .icon { transform: translateX(5px); }
+.leadcard:hover { background-color: #082046; }
+@media (max-width: 800px) { .lead-grid { grid-template-columns: minmax(0, 1fr); } }
+
 /* ---------- Process steps (a real sequence, so numbered) ---------- */
-.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 36px); }
 .steps li { position: relative; padding-top: 64px; }
-.steps li::before { content: ""; position: absolute; top: 21px; left: 22px; right: calc(-1 * clamp(20px, 3vw, 44px)); height: 2px; background: var(--field); }
+.steps li::before { content: ""; position: absolute; top: 21px; left: 22px; right: calc(-1 * clamp(18px, 2.4vw, 36px)); height: 2px; background: var(--field); }
 .steps li:last-child::before { display: none; }
 .steps__n { position: absolute; top: 0; left: 0; z-index: 1; width: 44px; height: 44px; display: grid; place-items: center; font: 700 1.5rem/1 var(--font-display); color: #fff; background: var(--red); border-radius: 50%; }
 .steps h3 { margin-bottom: .2em; font: 700 clamp(1.875rem, 2.6vw, 2.375rem)/1 var(--font-display); color: var(--blue); }
 .steps p { margin: 0; max-width: 26ch; color: var(--muted); }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 28px; }
-  .steps li:nth-child(2)::before { display: none; }
+  .steps li::before { display: none; }
 }
 @media (max-width: 520px) {
   .steps { grid-template-columns: minmax(0, 1fr); gap: 32px; }
@@ -404,8 +446,11 @@ dialog.profile::backdrop { background: rgba(4, 18, 43, .72); }
 
 /* ---------- Service detail ---------- */
 .service { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(32px, 6vw, 88px); align-items: center; padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--line); }
-.service:first-child { border-top: 0; }
-.service:nth-child(even) .service__media { order: -1; }
+.services__group + .service { border-top: 0; padding-top: clamp(28px, 4vw, 48px); }
+.service--flip .service__media { order: -1; }
+.services__group { padding-top: clamp(48px, 7vw, 88px); }
+.services__group--ruled { border-top: 1px solid var(--line); }
+.services__group .lead { margin: 0; }
 .service .h-display { margin-bottom: .3em; }
 .service__note { font-weight: 600; color: var(--blue); }
 .checks { display: grid; gap: 10px; margin: 26px 0; }
@@ -421,7 +466,7 @@ dialog.profile::backdrop { background: rgba(4, 18, 43, .72); }
 .media__label { position: absolute; z-index: 3; left: 16px; bottom: 12px; margin: 0; color: rgba(255, 255, 255, .7); }
 @media (max-width: 900px) {
   .service { grid-template-columns: minmax(0, 1fr); }
-  .service:nth-child(even) .service__media { order: 0; }
+  .service--flip .service__media { order: 0; }
   .service__media { max-width: 600px; }
 }
 

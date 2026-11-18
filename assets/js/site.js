@@ -1,4 +1,4 @@
-﻿/* Hanntec Engineering website: small, dependency-free script. */
+/* Hanntec Engineering website: small, dependency-free script. */
 (function () {
   'use strict';
 

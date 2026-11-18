@@ -1,4 +1,4 @@
-﻿# Hanntec Engineering website (draft 2)
+# Hanntec Engineering website (draft 2)
 
 Plain HTML, CSS and a little JavaScript. No build step, no framework, and it can be hosted anywhere.
 Open `index.html` in a browser to view it. If fonts look plain when opened by double-click, view it through any simple web server instead.
@@ -9,9 +9,9 @@ An earlier one-page draft is in `..\hanntec-website`. It has not been touched.
 
 | File | What it is |
 | --- | --- |
-| `index.html` | Home: hero, services, process, sectors, before/after slider, rotating client-logo wheel, call to action |
+| `index.html` | Home: hero, the two lead services (ROI analysis & reporting, Engineering advisory), five delivery services, process, sectors, before/after slider, rotating client-logo wheel, call to action |
 | `about.html` | About, **Meet the team** (`#team`), **Core values** (`#values`) |
-| `services.html` | Design, Electrical installation & implementation, Commissioning, Mechanical installation & process engineering |
+| `services.html` | Advice and analysis: ROI analysis & reporting, Engineering advisory. Delivery: Design, Electrical installation & implementation, Mechanical installation & process engineering, Construction, Commissioning |
 | `sectors.html` | Food & beverage, Agriculture, Construction, Energy/power/renewables, Life sciences, Hospitality, Healthcare |
 | `contact.html` | Enquiry form and contact details |
 | `privacy.html` | Draft privacy notice (have it reviewed before launch) |
@@ -28,6 +28,7 @@ Every photo slot shows a blueprint-style placeholder until a file with the right
 | Hero video (replaces the drawing) | `assets/video/hero.mp4` (short, silent, looping, under 8 MB) |
 | Before/after slider | Already added (`hero/before.jpg`, `hero/after.jpg`, 1900x980, each showing the whole building, with the fence line at the same height). To change it, replace both with photos framed the same way |
 | Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
+| Lead service photos (optional, Services page only) | `services/roi.jpg`, `services/advisory.jpg` |
 | Sector tiles and sector pages | Already added (7 photos in ``sectors/``, named after each sector). Swap for sharper or own photos any time |
 | Team portraits (square, face centred) | `assets/img/team/jack-walshe.jpg`, `jackie-barden.jpg`, `niamh-kelly.jpg`, `aidan-armstrong.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` |
 
@@ -44,6 +45,7 @@ Yellow and grey notes on the pages mark things to finish. The **Draft notes** bu
 
 ## Before launch
 
+- [ ] Confirm the draft wording for ROI analysis & reporting, Engineering advisory and Construction (yellow notes on the Services page)
 - [ ] Company registration number (a public listing shows 592547, so confirm it on the CRO) and registered office
 - [ ] Each person's LinkedIn profile link (the company link is already set)
 - [ ] Real photos, team portraits and bios; confirm Jack's title (signatures say "Operations", the old site said "Co-founder and Operations Director")
