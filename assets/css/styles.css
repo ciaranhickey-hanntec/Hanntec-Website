@@ -1,4 +1,4 @@
-/* Hanntec Engineering website
+﻿/* Hanntec Engineering website
    Colours come from the logo. Edit the tokens below to retheme. */
 
 @font-face { font-family: "Barlow Condensed"; src: url("../fonts/barlow-condensed-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
@@ -161,7 +161,7 @@ button { font: inherit; }
 .cover { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
 
 /* Placeholder surface used until a real photo is added */
-.svc, .sec, .media, .project__media, .person__photo {
+.svc, .sec, .media, .person__photo {
   background-color: var(--navy-800);
   background-image:
     linear-gradient(rgba(141, 184, 247, .09) 1px, transparent 1px),
@@ -324,27 +324,29 @@ button { font: inherit; }
 .compare:has(input:focus-visible) .compare__handle { outline: 3px solid #fff; box-shadow: 0 0 0 7px var(--blue-600); }
 @media (max-width: 900px) { .compare-wrap { grid-template-columns: minmax(0, 1fr); } }
 
-/* ---------- Projects ---------- */
-.projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px); }
-.project h3 { margin-bottom: .25em; font: 700 clamp(1.75rem, 2.4vw, 2.125rem)/1.05 var(--font-display); color: var(--blue); }
-.project p:last-child { margin: 0; color: var(--muted); }
-.project__media { position: relative; isolation: isolate; display: grid; place-items: center; aspect-ratio: 4 / 3; margin-bottom: 20px; overflow: hidden; border-radius: var(--r); }
-.project__icon { width: 24%; height: auto; color: var(--sky); opacity: .5; stroke-width: 1.2; }
-.chip { position: absolute; z-index: 3; top: 14px; left: 14px; padding: .25em .8em; font: 600 .9375rem/1.4 var(--font-body); color: #fff; background: var(--red); border-radius: 999px; }
-.project__label { position: absolute; z-index: 3; left: 14px; bottom: 10px; margin: 0; color: rgba(255, 255, 255, .7); }
-.project__meta { display: flex; flex-wrap: wrap; gap: 0 14px; margin-bottom: .4em; font-size: 1rem; color: var(--muted); }
-.project__meta strong { color: var(--red); }
-.projects__note { margin-top: 28px; }
-@media (max-width: 900px) { .projects { grid-template-columns: minmax(0, 1fr); max-width: 560px; } }
-
-/* ---------- Clients ---------- */
-.clients { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; margin: 24px 0 16px; }
-.client { display: grid; place-items: center; height: 84px; padding: 12px; border: 2px dashed var(--field); border-radius: var(--r-sm); }
-.client img { max-height: 100%; width: auto; object-fit: contain; }
-.client .draft { margin: 0; }
-html.drafts-off .client { border: 0; }
-@media (max-width: 900px) { .clients { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-
+/* ---------- Client wheel (3D ring: drag, arrows, keyboard, auto-turns, pausable) ---------- */
+.wheel {
+  --w: 240px; --h: 136px; --R: 530px; --n: 13; --px: 28px; --py: 22px;
+  position: relative; height: calc(var(--h) + 96px); overflow: hidden; perspective: calc(var(--R) * 3.4);
+  cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: var(--r);
+}
+.wheel:active { cursor: grabbing; }
+.wheel:focus-visible { outline-offset: -3px; }
+.wheel__ring { position: absolute; inset: 0; transform-style: preserve-3d; transform: translateZ(calc(var(--R) * -1)); will-change: transform; }
+.wheel__item {
+  position: absolute; left: 50%; top: 50%; width: var(--w); height: var(--h); margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform: rotateY(calc(var(--i) * 360deg / var(--n))) translateZ(var(--R)); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.wheel__card { display: grid; place-items: center; width: 100%; height: 100%; padding: var(--py) var(--px); background: #fff; border-radius: 20px; box-shadow: 0 14px 34px rgba(6, 24, 51, .14), 0 1px 0 rgba(6, 24, 51, .06); }
+.wheel__card img { display: block; max-width: calc(var(--w) - 2 * var(--px)); max-height: calc(var(--h) - 2 * var(--py)); width: auto; height: auto; object-fit: contain; pointer-events: none; }
+.wheel__controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 8px; }
+.wheel__btn { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; color: var(--blue); background: #fff; border: 2px solid var(--line); border-radius: 50%; cursor: pointer; transition: background-color .15s, border-color .15s, color .15s; }
+.wheel__btn:hover { color: #fff; background: var(--blue); border-color: var(--blue); }
+.wheel__btn--text { width: auto; padding: 0 1.3em; font: 600 .9375rem/1 var(--font-body); border-radius: 999px; }
+.wheel__btn .icon { width: 22px; height: 22px; }
+.icon--flip { transform: scaleX(-1); }
+@media (max-width: 900px) { .wheel { --w: 200px; --h: 114px; --R: 440px; } }
+@media (max-width: 560px) { .wheel { --w: 168px; --h: 98px; --R: 372px; --px: 20px; --py: 14px; } }
 /* ---------- Call to action ---------- */
 .cta__grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 56px; }
 .cta__grid .h-display { margin-bottom: .2em; }

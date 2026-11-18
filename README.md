@@ -9,7 +9,7 @@ An earlier one-page draft is in `..\hanntec-website`. It has not been touched.
 
 | File | What it is |
 | --- | --- |
-| `index.html` | Home: hero, services, process, sectors, before/after slider, recent work, client logos, call to action |
+| `index.html` | Home: hero, services, process, sectors, before/after slider, rotating client-logo wheel, call to action |
 | `about.html` | About, **Meet the team** (`#team`), **Core values** (`#values`) |
 | `services.html` | Design, Electrical installation & implementation, Commissioning, Mechanical installation & process engineering |
 | `sectors.html` | Food & beverage, Agriculture, Construction, Energy/power/renewables, Life sciences, Hospitality, Healthcare |
@@ -27,11 +27,9 @@ Every photo slot shows a blueprint-style placeholder until a file with the right
 | Hero photo (replaces the drawing) | `assets/img/hero/hero.jpg` (wide, about 2400 px) |
 | Hero video (replaces the drawing) | `assets/video/hero.mp4` (short, silent, looping, under 8 MB) |
 | Before/after slider | `assets/img/hero/before.jpg`, `assets/img/hero/after.jpg` (4:3, same framing for both) |
-| Service tiles and service pages | `assets/img/services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` |
+| Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
 | Sector tiles and sector pages | `assets/img/sectors/food-beverage.jpg`, `agriculture.jpg`, `construction.jpg`, `energy.jpg`, `life-sciences.jpg`, `hospitality.jpg`, `healthcare.jpg` |
 | Team portraits (square, face centred) | `assets/img/team/jack-walshe.jpg`, `jackie-barden.jpg`, `niamh-kelly.jpg`, `aidan-armstrong.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` |
-| Home page project cards | `assets/img/projects/project-1.jpg`, `project-2.jpg`, `project-3.jpg` |
-| Client logos | `assets/img/clients/client-1.png` to `client-6.png` (transparent PNGs) |
 
 Photos should be about 1600 px wide and under 400 KB each. Text sits on a dark fade at the bottom of each tile, so most photos work. Add descriptive `alt` text in the HTML when a real photo replaces a placeholder.
 
@@ -50,7 +48,7 @@ Yellow and grey notes on the pages mark things to finish. The **Draft notes** bu
 - [ ] LinkedIn company page link (footer) and each person's profile link
 - [ ] Confirm address and phone numbers (new office in Kilmacthomas?)
 - [ ] Real photos, team portraits and bios; confirm Jack's title (signatures say "Operations", the old site said "Co-founder and Operations Director")
-- [ ] Project cards: confirm the three descriptions, then add client names and logos only with permission
+- [ ] Client logos (13 on the home page wheel): confirm each company is happy to be shown
 - [ ] "Certified by Safe Electric registered electricians" (services page): confirm it is still true
 - [ ] Connect the contact form (`formEndpoint`) and send a test enquiry
 - [ ] Privacy notice reviewed

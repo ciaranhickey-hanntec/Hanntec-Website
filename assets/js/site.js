@@ -157,6 +157,99 @@
     });
   })();
 
+  /* ---------- Client wheel ---------- */
+  (function () {
+    var wheel = $('[data-wheel]');
+    if (!wheel) return;
+    var ring = $('.wheel__ring', wheel);
+    var items = $$('.wheel__item', ring);
+    var n = items.length;
+    var step = 360 / n;
+    var theta = 0, auto = !reduceMotion, hover = false, dragging = false, visible = true;
+    var anim = null, raf = 0, last = 0, lastX = 0, vel = 0;
+    var SPEED = -4.2; // degrees per second while turning on its own (one logo about every 7 seconds)
+    var toggle = $('[data-wheel-toggle]');
+
+    function render() {
+      ring.style.transform = 'translateZ(calc(var(--R) * -1)) rotateY(' + theta.toFixed(2) + 'deg)';
+      for (var i = 0; i < n; i++) {
+        var a = (i * step + theta) * Math.PI / 180;
+        var f = Math.cos(a);
+        items[i].style.opacity = f > 0 ? (0.3 + 0.7 * Math.pow(f, 1.6)).toFixed(3) : 0;
+      }
+    }
+
+    function snap(v) { return Math.round(v / step) * step; }
+
+    function animateTo(target, ms) {
+      var from = theta, t0 = null;
+      anim = function (ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / ms, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        theta = from + (target - from) * e;
+        if (p >= 1) anim = null;
+      };
+    }
+
+    function tick(ts) {
+      var dt = Math.min(ts - last, 60) / 1000;
+      last = ts;
+      if (anim) anim(ts);
+      else if (!dragging && auto && !hover && !document.hidden) theta += SPEED * dt;
+      render();
+      raf = visible ? requestAnimationFrame(tick) : 0;
+    }
+
+    function setAuto(on) {
+      auto = on;
+      if (toggle) toggle.textContent = on ? 'Pause' : 'Play';
+    }
+    setAuto(auto);
+
+    wheel.addEventListener('pointerdown', function (e) {
+      dragging = true; anim = null; vel = 0; lastX = e.clientX;
+      try { wheel.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+    });
+    wheel.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - lastX;
+      lastX = e.clientX;
+      theta += dx * 0.2;
+      vel = dx * 0.2;
+    });
+    function release() {
+      if (!dragging) return;
+      dragging = false;
+      animateTo(snap(theta + vel * 16), 700);
+    }
+    wheel.addEventListener('pointerup', release);
+    wheel.addEventListener('pointercancel', release);
+    wheel.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hover = true; });
+    wheel.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hover = false; });
+    wheel.addEventListener('focusin', function () { hover = true; });
+    wheel.addEventListener('focusout', function () { hover = false; });
+
+    function turn(dir) { animateTo(snap(theta) + dir * step, 650); }
+    wheel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); turn(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); turn(-1); }
+    });
+    var prev = $('[data-wheel-prev]'), next = $('[data-wheel-next]');
+    if (prev) prev.addEventListener('click', function () { turn(1); });
+    if (next) next.addEventListener('click', function () { turn(-1); });
+    if (toggle) toggle.addEventListener('click', function () { setAuto(!auto); });
+
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+      }).observe(wheel);
+    }
+    render();
+    raf = requestAnimationFrame(tick);
+  })();
+
   /* ---------- Contact form ---------- */
   (function () {
     var form = $('[data-enquiry]');
