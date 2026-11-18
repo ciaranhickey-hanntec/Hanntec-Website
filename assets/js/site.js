@@ -1,4 +1,4 @@
-/* Hanntec Engineering website: small, dependency-free script. */
+﻿/* Hanntec Engineering website: small, dependency-free script. */
 (function () {
   'use strict';
 
@@ -339,7 +339,7 @@
           form.reset();
           say('Thanks, we have your enquiry and will be in touch shortly.', 'ok');
         }).catch(function () {
-          say('That did not send. Please call 051 295 556 or email ' + CONFIG.enquiryEmail + '.', 'error');
+          say('That did not send. Please call 087 912 2237 or email ' + CONFIG.enquiryEmail + '.', 'error');
         });
         return;
       }

@@ -45,8 +45,7 @@ Yellow and grey notes on the pages mark things to finish. The **Draft notes** bu
 ## Before launch
 
 - [ ] Company registration number (a public listing shows 592547, so confirm it on the CRO) and registered office
-- [ ] LinkedIn company page link (footer) and each person's profile link
-- [ ] Confirm address and phone numbers (new office in Kilmacthomas?)
+- [ ] Each person's LinkedIn profile link (the company link is already set)
 - [ ] Real photos, team portraits and bios; confirm Jack's title (signatures say "Operations", the old site said "Co-founder and Operations Director")
 - [ ] Client logos (13 on the home page wheel): confirm each company is happy to be shown
 - [ ] "Certified by Safe Electric registered electricians" (services page): confirm it is still true
