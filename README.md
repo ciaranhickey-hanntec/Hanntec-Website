@@ -20,12 +20,12 @@ The header and footer are repeated in each page, so change them in all six.
 
 ## Adding your own photos and video
 
+Every photo has a WebP copy next to it (same name, `.webp`), which browsers load first because it is smaller. When you replace a photo, replace its `.webp` too, or delete the old `.webp` so the new `.jpg` is used. The hero drawing no longer has a photo or video slot; ask for one to be added if you get a hero video.
+
 Every photo slot shows a blueprint-style placeholder until a file with the right name is dropped in. No code changes needed.
 
 | Slot | Put the file here |
 | --- | --- |
-| Hero photo (replaces the drawing) | `assets/img/hero/hero.jpg` (wide, about 2400 px) |
-| Hero video (replaces the drawing) | `assets/video/hero.mp4` (short, silent, looping, under 8 MB) |
 | Before/after slider | Already added (`hero/before.jpg`, `hero/after.jpg`, 1900x980, each showing the whole building, with the fence line at the same height). To change it, replace both with photos framed the same way |
 | Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
 | Lead service photos (home page cards and Services page) | Already added: `services/roi.jpg`, `services/advisory.jpg` |
@@ -43,8 +43,18 @@ Photos should be about 1600 px wide and under 400 KB each. Text sits on a dark f
 
 Draft notes are no longer shown on the pages. Anything still to confirm is in the checklist below.
 
+## Search and sharing
+
+- `sitemap.xml` and `robots.txt` point search engines at `https://www.hanntec.com/`.
+- Each page has a canonical link and a share image (`assets/img/share.jpg`, 1200x630) for LinkedIn, Teams and WhatsApp previews. These use the www.hanntec.com address, so they work fully once the domain points at this site.
+- `404.html` is shown for missing pages on GitHub Pages and most hosts.
+
 ## Before launch
 
+- [ ] Add 2-3 case studies with figures (client, challenge, what we did, outcome) and a "What you get" note for ROI analysis
+- [ ] Senior engineers: real photos and longer bios; name the advisory lead
+- [ ] Replace off-brief stock photos (Food & beverage buffet, Hospitality beer taps) with plant or site photos
+- [ ] Decide a response time to promise on the Contact page, and a short statement on independence of advice
 - [ ] Confirm the draft wording for ROI analysis & reporting, Engineering advisory and Construction & project management, and prune the "All capabilities" list (yellow notes on the Services page)
 - [ ] Company registration number (a public listing shows 592547, so confirm it on the CRO) and registered office
 - [ ] Each person's LinkedIn profile link (the company link is already set)

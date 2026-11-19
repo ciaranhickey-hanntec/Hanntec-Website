@@ -369,6 +369,9 @@
       };
 
       if (CONFIG.formEndpoint) {
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
         say('Sending...', '');
         fetch(CONFIG.formEndpoint, {
           method: 'POST',
@@ -380,6 +383,9 @@
           say('Thanks, we have your enquiry and will be in touch shortly.', 'ok');
         }).catch(function () {
           say('That did not send. Please call 087 912 2237 or email ' + CONFIG.enquiryEmail + '.', 'error');
+        }).then(function () {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
         });
         return;
       }
