@@ -28,7 +28,7 @@ Every photo slot shows a blueprint-style placeholder until a file with the right
 | Hero video (replaces the drawing) | `assets/video/hero.mp4` (short, silent, looping, under 8 MB) |
 | Before/after slider | Already added (`hero/before.jpg`, `hero/after.jpg`, 1900x980, each showing the whole building, with the fence line at the same height). To change it, replace both with photos framed the same way |
 | Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
-| Lead service photos (optional, Services page only) | `services/roi.jpg`, `services/advisory.jpg` |
+| Lead service photos (home page cards and Services page) | Already added: `services/roi.jpg`, `services/advisory.jpg` |
 | Sector tiles and sector pages | Already added (7 photos in ``sectors/``, named after each sector). Swap for sharper or own photos any time |
 | Team portraits (square, face centred) | `assets/img/team/jack-walshe.jpg`, `jackie-barden.jpg`, `niamh-kelly.jpg`, `aidan-armstrong.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` |
 
@@ -41,7 +41,7 @@ Photos should be about 1600 px wide and under 400 KB each. Text sits on a dark f
 
 ## Draft notes
 
-Yellow and grey notes on the pages mark things to finish. The **Draft notes** button (bottom left) hides them so you can see the page as visitors will. Add `?final` to any page address to start with them hidden. Before launch, delete the button from each page and remove the `.draft` elements.
+Draft notes are no longer shown on the pages. Anything still to confirm is in the checklist below.
 
 ## Before launch
 
