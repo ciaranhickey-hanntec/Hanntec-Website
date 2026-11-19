@@ -111,10 +111,45 @@
     sync();
   })();
 
-  /* ---------- Hero video: pause for people who prefer reduced motion ---------- */
+  /* ---------- Hero video ----------
+     The poster image always shows first. The video is only fetched on screens wider than 700px,
+     never for visitors who ask for reduced motion or less data, and it pauses while scrolled out of view. */
   (function () {
-    var v = $('.hero__media video');
-    if (v && reduceMotion) { v.removeAttribute('autoplay'); v.pause(); }
+    var video = $('.hero__video');
+    var toggle = $('.hero__toggle');
+    if (!video) return;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var small = window.matchMedia && window.matchMedia('(max-width: 700px)').matches;
+    if (reduceMotion || saveData || small) return;
+
+    [['webm', video.getAttribute('data-webm')], ['mp4', video.getAttribute('data-mp4')]].forEach(function (f) {
+      var s = document.createElement('source');
+      s.src = f[1]; s.type = 'video/' + f[0];
+      video.appendChild(s);
+    });
+    video.load();
+
+    var userPaused = false;
+    function play() {
+      var p = video.play();
+      if (p && p.then) p.then(function () { video.classList.add('is-playing'); if (toggle) toggle.hidden = false; }, function () {});
+    }
+    play();
+
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        userPaused = !video.paused;
+        if (userPaused) video.pause(); else play();
+        toggle.setAttribute('aria-pressed', String(userPaused));
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) video.pause();
+        else if (!userPaused) play();
+      }).observe(video);
+    }
   })();
 
   /* ---------- Before / after slider ---------- */

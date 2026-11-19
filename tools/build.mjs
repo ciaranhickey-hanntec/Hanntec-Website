@@ -1,5 +1,5 @@
 // Builds every page of the site. Run from the site folder:  node tools/build.mjs
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { icon, page, SITE, isoScene } from './lib.mjs';
 import { loadCases, caseCard, casePage, projectsPage } from './cases.mjs';
@@ -233,8 +233,25 @@ const home = () => {
 
   const wheelItems = clients.map(([file, name], i) => `<li class="wheel__item" style="--i:${i}"><span class="wheel__card"><img src="assets/img/clients/${file}.png" alt="${name.replace(/&/g, '&amp;')}" loading="lazy" draggable="false"></span></li>`).join('\n        ');
 
-  const body = `<section class="hero" data-hero>
-  <div class="hero__art">${isoScene()}</div>
+  // Hero background: the looping plant-room video when its files are present, otherwise the line drawing.
+  // The video is attached by site.js only on larger screens; phones and reduced-motion visitors get the poster.
+  const HERO = { poster: 'assets/img/hero/hero-poster.webp', webm: 'assets/video/hero-plantroom.webm', mp4: 'assets/video/hero-plantroom.mp4' };
+  const hasVideo = [HERO.poster, HERO.webm, HERO.mp4].every((f) => existsSync(`${OUT}/${f}`));
+  const heroBg = hasVideo
+    ? `<div class="hero__media" aria-hidden="true">
+    <img class="hero__poster" src="${HERO.poster}" alt="" width="1280" height="720" fetchpriority="high" decoding="async">
+    <video class="hero__video" muted loop playsinline preload="none" tabindex="-1" data-webm="${HERO.webm}" data-mp4="${HERO.mp4}"></video>
+  </div>`
+    : `<div class="hero__art">${isoScene()}</div>`;
+  const heroToggle = hasVideo
+    ? `<button class="hero__toggle" type="button" aria-pressed="false" aria-label="Pause background video" hidden>
+    <svg class="hero__toggle-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg>
+    <svg class="hero__toggle-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+  </button>`
+    : '';
+
+  const body = `<section class="hero${hasVideo ? ' hero--video' : ''}" data-hero>
+  ${heroBg}
   <div class="wrap hero__inner">
     <h1 class="hero__title">Engineering, start to finish.</h1>
     <p class="hero__lead">We advise on what to build, prove the return, then design, build and commission it.</p>
@@ -243,7 +260,7 @@ const home = () => {
       <a class="btn btn--ghost" href="services.html">Our services</a>
     </div>
   </div>
-  <p class="draft hero__note">Placeholder drawing. Add a hero photo as assets/img/hero/hero.jpg or a short looping video as assets/video/hero.mp4 and it replaces the drawing.</p>
+  ${heroToggle}
 </section>
 
 <section class="section" id="services">

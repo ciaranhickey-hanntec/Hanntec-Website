@@ -26,7 +26,22 @@ Editing a generated `.html` file directly works, but the next rebuild overwrites
 
 ## Adding your own photos and video
 
-Every photo has a WebP copy next to it (same name, `.webp`), which browsers load first because it is smaller. When you replace a photo, replace its `.webp` too, or delete the old `.webp` so the new `.jpg` is used. The hero drawing no longer has a photo or video slot; ask for one to be added if you get a hero video.
+Every photo has a WebP copy next to it (same name, `.webp`), which browsers load first because it is smaller. When you replace a photo, replace its `.webp` too, or delete the old `.webp` so the new `.jpg` is used.
+
+### Hero video
+
+The home page hero is an 8-second looping plant-room video, made with Google Flow (Veo 3.1 Lite) following the hero video guide. Its working files (the master image, raw clips and the export) are in `..\Hanntec-Hero`, outside the site folder so they are never uploaded.
+
+| File | What it is |
+| --- | --- |
+| `assets/video/hero-plantroom.webm` and `.mp4` | The video, 1280x720, silent, about 0.5 MB each |
+| `assets/img/hero/hero-poster.webp` | The still shown while the video loads, and instead of it on phones |
+
+- The video only loads on screens wider than 700 px. Phones, visitors who have reduced motion switched on, and visitors in data-saver mode see the still image.
+- It pauses when scrolled out of view, and has a pause button in the bottom-right corner.
+- If all three files are removed, the home page goes back to the line drawing on the next rebuild.
+- To replace the video, give the new files new names, change the names in `tools/build.mjs` (search for `HERO`) and rebuild. `netlify.toml` tells browsers to keep the video for a year, so files with the same name would not refresh for returning visitors.
+- The video is AI-generated. Don't present it as a real Hanntec project; the Tirlán before and after and the case studies carry the proof. Swap in real footage from a job when you have it.
 
 Every photo slot shows a blueprint-style placeholder until a file with the right name is dropped in. No code changes needed.
 
@@ -84,7 +99,7 @@ Draft notes are no longer shown on the pages. Anything still to confirm is in th
 
 ## Design notes
 
-- Dark hero with a drawing of a plant that draws itself in on load. Add `hero.jpg` or `hero.mp4` and it is replaced by your own media.
+- The home page hero is the looping plant-room video under a navy wash, darkest behind the headline (see "Hero video"). The line drawing of a plant is the fallback if the video files are removed, and is still used in the LinkedIn banner.
 - Colours come from the logo: blue `#0B3A82` and red `#C8142F` (the logo red, brightened so it reads on dark). They are the first lines of `assets/css/styles.css`.
 - The header is transparent over the dark hero and turns white once you scroll. `logo-on-dark.png` (red H, lighter blue wordmark) is used over dark areas and `logo.png` (original colours) over white.
 - The red rounded square on inner page headers and team portraits echoes the boxed H in the logo.

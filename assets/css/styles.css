@@ -176,11 +176,34 @@ button { font: inherit; }
   -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
   mask-image: linear-gradient(to bottom, #000, transparent 85%);
 }
-.hero__media { position: absolute; inset: 0; z-index: -2; }
-.hero__media video, .hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.hero__media:has(video), .hero__media:has(img) { background: var(--navy-900); }
-.hero__media:has(video)::after, .hero__media:has(img)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6, 24, 51, .9), rgba(6, 24, 51, .35)); }
-.hero:has(.hero__media video, .hero__media img) .hero__art { display: none; }
+/* Video hero: poster first, the looping video fades in over it once it plays (see site.js) */
+.hero__media { position: absolute; inset: 0; z-index: -2; background: var(--navy-900); }
+.hero__poster, .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
+.hero__video { opacity: 0; transition: opacity .8s ease; }
+.hero__video.is-playing { opacity: 1; }
+/* navy wash: strongest behind the headline on the left and under the header at the top */
+.hero__media::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(6, 24, 51, .7) 0, rgba(6, 24, 51, 0) 26%),
+    linear-gradient(90deg, rgba(6, 24, 51, .92) 0%, rgba(6, 24, 51, .8) 38%, rgba(6, 24, 51, .38) 72%, rgba(6, 24, 51, .22) 100%);
+}
+.hero--video::before { display: none; }
+.hero--video .hero__lead { color: #fff; }
+.hero__toggle {
+  position: absolute; right: var(--gutter); bottom: 24px; display: grid; place-items: center;
+  width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 50%;
+  background: rgba(6, 24, 51, .55); color: #fff; cursor: pointer; transition: background .2s ease, border-color .2s ease;
+}
+.hero__toggle[hidden] { display: none; }
+.hero__toggle:hover { background: rgba(6, 24, 51, .85); border-color: #fff; }
+.hero__toggle:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.hero__toggle svg { width: 18px; height: 18px; fill: currentColor; }
+.hero__toggle-play, .hero__toggle[aria-pressed="true"] .hero__toggle-pause { display: none; }
+.hero__toggle[aria-pressed="true"] .hero__toggle-play { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__video, .hero__toggle { display: none !important; }
+}
 
 .hero__art {
   position: absolute; z-index: -1; right: -1vw; bottom: 5%; width: min(54vw, 880px);
@@ -198,6 +221,14 @@ button { font: inherit; }
   .hero__inner { order: 1; width: min(1240px, 100% - 2 * var(--gutter)); }
   .hero__art { order: 2; position: relative; right: auto; bottom: auto; width: min(560px, 100% - 2 * var(--gutter)); margin: 32px auto 0; -webkit-mask-image: none; mask-image: none; }
   .hero__note { order: 3; position: static; max-width: none; margin: 16px var(--gutter) 0; text-align: left; }
+  /* video hero on tablets and phones: the photo fills the hero, text sits on the darker lower part */
+  .hero--video { justify-content: flex-end; min-height: min(760px, 92svh); padding-bottom: 48px; }
+  .hero--video .hero__poster, .hero--video .hero__video { object-position: 84% 50%; }
+  .hero--video .hero__media::after {
+    background:
+      linear-gradient(to bottom, rgba(6, 24, 51, .7) 0, rgba(6, 24, 51, 0) 22%),
+      linear-gradient(0deg, rgba(6, 24, 51, .95) 0%, rgba(6, 24, 51, .82) 45%, rgba(6, 24, 51, .4) 100%);
+  }
 }
 
 /* Drawing that draws itself in (the page's one load animation) */
