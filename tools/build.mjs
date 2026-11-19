@@ -577,8 +577,10 @@ const contactPage = () => {
       </div>
     </div>
 
-    <form class="form" id="enquiry" data-enquiry novalidate>
+    <form class="form" id="enquiry" name="enquiry" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="website" data-enquiry>
       <h2 class="h-display h-display--sm">Send an enquiry</h2>
+      <input type="hidden" name="form-name" value="enquiry">
+      <input type="hidden" name="subject" value="Website enquiry">
       <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required><p class="field__error" hidden></p></div>
       <div class="field"><label for="f-company">Company <span class="optional">(optional)</span></label><input id="f-company" name="company" autocomplete="organization"></div>
       <div class="field-row">
@@ -590,12 +592,18 @@ const contactPage = () => {
         <div class="field"><label for="f-sector">Your sector</label><select id="f-sector" name="sector"><option value="">Other or not listed</option>${sectorOpts}</select></div>
       </div>
       <div class="field"><label for="f-message">How can we help?</label><textarea id="f-message" name="message" rows="5" required></textarea><p class="field__error" hidden></p></div>
-      <div class="field field--check"><input id="f-consent" name="consent" type="checkbox" required><label for="f-consent">I agree that Hanntec can use these details to reply to my enquiry. <a href="privacy.html">Privacy notice</a></label><p class="field__error" hidden></p></div>
-      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field field--check"><input id="f-consent" name="consent" type="checkbox" value="Yes" required><label for="f-consent">I agree that Hanntec can use these details to reply to my enquiry. <a href="privacy.html">Privacy notice</a></label><p class="field__error" hidden></p></div>
+      <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
       <button class="btn btn--red" type="submit">Send enquiry</button>
       <p class="form__status" role="status" aria-live="polite"></p>
-      <p class="draft">Until a form service is connected in assets/js/site.js, this opens the visitor’s email app with the enquiry ready to send.</p>
     </form>
+    <div class="form form--done" data-enquiry-done tabindex="-1" hidden>
+      ${icon('check', 'icon icon--xl')}
+      <h2 class="h-display h-display--sm">Thanks<span data-enquiry-name></span>, we have your enquiry</h2>
+      <p>It has gone straight to our engineers and we’ll come back to you shortly. A copy of what you sent is below.</p>
+      <dl class="form__summary" data-enquiry-summary></dl>
+      <p>If it’s urgent, call us on <a href="tel:${SITE.phoneHref}">${SITE.phone}</a>.</p>
+    </div>
   </div>
 </section>`;
   return page({
@@ -617,7 +625,8 @@ const privacyPage = () => {
     <h2>Our legal basis</h2>
     <p>We process your details because you asked us to get in touch, and because it is in our legitimate interest to respond to business enquiries.</p>
     <h2>Who sees it</h2>
-    <p>Your enquiry goes to our team by email. We do not sell your details or use them for marketing you did not ask for. The email and form services we use act on our instructions.</p>
+    <p>Your enquiry goes to our team by email. We do not sell your details or use them for marketing you did not ask for.</p>
+    <p>The enquiry form is run by Netlify, the company that hosts this website. Netlify stores each enquiry and emails it to us, acting only on our instructions. Netlify may handle data outside the European Economic Area, under safeguards approved by the European Commission. Our email provider acts on our instructions too.</p>
     <h2>How long we keep it</h2>
     <p>We keep enquiries for as long as needed to deal with them, and for a reasonable period after in case you get back in touch. Tell us if you want yours deleted sooner.</p>
     <h2>Your rights</h2>
@@ -677,7 +686,20 @@ ${urls.map((u) => `  <url><loc>${SITE.url}${u}</loc><lastmod>${today}</lastmod><
 write('services.html', servicesPage());
 write('sectors.html', sectorsPage());
 write('contact.html', contactPage());
+// shown after sending the enquiry form when JavaScript is off (the form's action); hidden from search engines
+write('thanks.html', page({
+  title: 'Thanks for your enquiry | Hanntec Engineering',
+  desc: 'Your enquiry has been sent to Hanntec Engineering.',
+  active: 'contact', path: 'thanks.html', noindex: true,
+  body: `${pageHero('Thanks, we have your enquiry', 'It has gone straight to our engineers and we’ll come back to you shortly.')}
+<section class="section section--tight">
+  <div class="wrap prose prose--page">
+    <p>If it’s urgent, call us on <a href="tel:${SITE.phoneHref}">${SITE.phone}</a> or email <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
+    <p><a class="btn btn--red" href="index.html">Back to the home page</a></p>
+  </div>
+</section>`,
+}));
 write('privacy.html', privacyPage());
 write('assets/img/hero/before.svg', isoScene({ mode: 'wire' }));
 write('assets/img/hero/after.svg', isoScene({ mode: 'solid' }));
-console.log(`built ${8 + cases.all.length + (cases.published.length ? 1 : 0)} pages (${cases.published.length} published projects, ${cases.all.length - cases.published.length} drafts)`);
+console.log(`built ${9 + cases.all.length + (cases.published.length ? 1 : 0)} pages (${cases.published.length} published projects, ${cases.all.length - cases.published.length} drafts)`);

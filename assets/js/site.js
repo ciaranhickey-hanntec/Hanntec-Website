@@ -6,12 +6,12 @@
      SETTINGS YOU MAY WANT TO CHANGE
      ------------------------------------------------------------------ */
   var CONFIG = {
-    // Contact form: paste a form-service address here (for example a Formspree
-    // form URL like "https://formspree.io/f/abcdwxyz") and enquiries are sent
-    // straight to your inbox. While it is empty, the form opens the visitor's
-    // email app with the enquiry ready to send.
-    formEndpoint: '',
-    enquiryEmail: 'jack@hanntec.com',
+    // Contact form: enquiries are posted to Netlify Forms (the site's host), which
+    // filters spam and emails each one to the addresses set in Netlify under
+    // Forms > Submission notifications. '/' is right for Netlify; only change it
+    // if the site moves to another host and form service.
+    formEndpoint: '/',
+    enquiryEmail: 'jack@hanntec.com',   // shown to visitors if sending fails
 
     // Team LinkedIn profiles. Paste each person's profile address between the
     // quotes. Until then the button opens a LinkedIn search for their name.
@@ -396,57 +396,92 @@
       status.className = 'form__status' + (kind ? ' is-' + kind : '');
     }
 
+    // With JavaScript on, the form checks itself and sends without leaving the page.
+    // Without it, the browser checks the required fields and posts to Netlify, which shows thanks.html.
+    form.noValidate = true;
+    var done = $('[data-enquiry-done]');
+    var btn = form.querySelector('button[type="submit"]');
+    var sending = false;
+
+    function label(n) {
+      var f = form.elements[n];
+      return f.tagName === 'SELECT' ? f.options[f.selectedIndex].text : f.value.trim();
+    }
+
+    function showDone(fields) {
+      var first = fields.name.split(/\s+/)[0];
+      $('[data-enquiry-name]', done).textContent = first ? ', ' + first : '';
+      var dl = $('[data-enquiry-summary]', done);
+      dl.textContent = '';
+      fields.rows.forEach(function (row) {
+        if (!row[1]) return;
+        var div = document.createElement('div');
+        var dt = document.createElement('dt'); dt.textContent = row[0];
+        var dd = document.createElement('dd'); dd.textContent = row[1];
+        div.appendChild(dt); div.appendChild(dd); dl.appendChild(div);
+      });
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+      var top = done.getBoundingClientRect().top + window.scrollY - 120;
+      if (window.scrollY > top) window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (form.elements.website.value) { say('Thanks, we have your enquiry.', 'ok'); return; } // spam trap
+      if (sending) return;
       if (!validate()) { say('Please fix the highlighted fields.', 'error'); return; }
 
-      var label = function (n) {
-        var f = form.elements[n];
-        return f.tagName === 'SELECT' ? f.options[f.selectedIndex].text : f.value.trim();
-      };
-      var data = {
-        name: form.elements.name.value.trim(),
-        company: form.elements.company.value.trim(),
-        email: form.elements.email.value.trim(),
-        phone: form.elements.phone.value.trim(),
-        need: label('need'),
-        sector: label('sector'),
-        message: form.elements.message.value.trim()
-      };
+      var name = form.elements.name.value.trim();
+      var company = form.elements.company.value.trim();
+      var need = form.elements.need.value ? label('need') : 'Not sure yet';
+      var sector = form.elements.sector.value ? label('sector') : 'Other or not listed';
 
-      if (CONFIG.formEndpoint) {
-        var btn = form.querySelector('button[type="submit"]');
-        btn.disabled = true;
-        btn.setAttribute('aria-busy', 'true');
-        say('Sending...', '');
-        fetch(CONFIG.formEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
-        }).then(function (r) {
-          if (!r.ok) throw new Error('Request failed');
-          form.reset();
-          say('Thanks, we have your enquiry and will be in touch shortly.', 'ok');
-        }).catch(function () {
-          say('That did not send. Please call 087 912 2237 or email ' + CONFIG.enquiryEmail + '.', 'error');
-        }).then(function () {
-          btn.disabled = false;
-          btn.removeAttribute('aria-busy');
+      // The notification email's subject line, e.g. "Website enquiry: Design & engineering, Mary Byrne (Acme Foods)"
+      form.elements.subject.value = 'Website enquiry: ' + need + ', ' + name + (company ? ' (' + company + ')' : '');
+
+      var body = new URLSearchParams(new FormData(form));
+      body.set('need', need);       // send the readable names rather than the short codes
+      body.set('sector', sector);
+
+      sending = true;
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      say('Sending your enquiry…', '');
+
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = ctrl && setTimeout(function () { ctrl.abort(); }, 15000);
+
+      fetch(CONFIG.formEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+        body: body.toString(),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        say('', '');
+        showDone({
+          name: name,
+          rows: [['Name', name], ['Company', company], ['Email', form.elements.email.value.trim()],
+            ['Phone', form.elements.phone.value.trim()], ['Needs', need], ['Sector', sector],
+            ['Message', form.elements.message.value.trim()]]
         });
-        return;
-      }
-
-      var lines = ['Name: ' + data.name];
-      if (data.company) lines.push('Company: ' + data.company);
-      lines.push('Email: ' + data.email);
-      if (data.phone) lines.push('Phone: ' + data.phone);
-      lines.push('Needs: ' + data.need, 'Sector: ' + data.sector, '', data.message);
-      var body = lines.join('\n');
-      window.location.href = 'mailto:' + CONFIG.enquiryEmail +
-        '?subject=' + encodeURIComponent('Website enquiry from ' + data.name) +
-        '&body=' + encodeURIComponent(body);
-      say('Your email app should open with the enquiry ready to send. If it does not, email ' + CONFIG.enquiryEmail + '.', 'ok');
+        form.reset();
+      }).catch(function () {
+        // keep what they typed, and give them another way to reach us
+        status.className = 'form__status is-error';
+        status.textContent = '';
+        status.appendChild(document.createTextNode('Sorry, your enquiry didn’t send. Please try again, or call '));
+        var tel = document.createElement('a'); tel.href = 'tel:+353879122237'; tel.textContent = '087 912 2237';
+        var mail = document.createElement('a'); mail.href = 'mailto:' + CONFIG.enquiryEmail; mail.textContent = CONFIG.enquiryEmail;
+        status.appendChild(tel); status.appendChild(document.createTextNode(' or email ')); status.appendChild(mail);
+        status.appendChild(document.createTextNode('.'));
+      }).then(function () {
+        if (timer) clearTimeout(timer);
+        sending = false;
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+      });
     });
   })();
 })();

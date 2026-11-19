@@ -57,10 +57,44 @@ Photos should be about 1600 px wide and under 400 KB each. Text sits on a dark f
 
 ## Settings (top of `assets/js/site.js`)
 
-- `formEndpoint`: paste a form service address (for example a Formspree form URL) so enquiries arrive in your inbox. While empty, the form opens the visitor's email app with the enquiry ready to send.
+- `formEndpoint`: where the enquiry form sends to. `'/'` is right for Netlify Forms (see "Contact form" below).
 - `linkedin`: each team member's LinkedIn profile address. Until set, the button opens a LinkedIn search for their name.
 
-## Draft notes
+## Contact form
+
+The enquiry form on `contact.html` uses **Netlify Forms**, which is built into the hosting. It is free and unlimited on Netlify's credit plans and needs no other account.
+
+**How it works for the visitor:**
+- The form checks the fields as they go.
+- It sends without leaving the page and then shows a "Thanks, we have your enquiry" panel with a copy of what they sent.
+- If sending fails, everything they typed stays in the form, and they're given the phone number and email.
+- With JavaScript off, the form still works: it posts to Netlify and lands on `thanks.html`.
+
+**How it works for us:**
+- Netlify checks each enquiry for spam with Akismet. Bots that fill the hidden `website` field are rejected.
+- Netlify emails each enquiry to the addresses set up in Netlify. The email's subject reads like "Website enquiry: Design & engineering, Mary Byrne (Acme Foods)".
+- Pressing Reply in the email replies to the customer, not to Netlify.
+
+**One-time setup in Netlify (after this version is deployed):**
+
+1. In app.netlify.com, open the site, go to **Forms** and select **Enable form detection**.
+2. Deploy again. Push a commit, or use **Deploys > Trigger deploy > Deploy site**. Netlify only finds forms during a deploy.
+3. Under **Forms**, check that a form called **enquiry** now appears.
+4. Go to **Forms > Submission notifications** and add an email notification. Leave the subject blank, because the form sets its own.
+   - Use the address that should receive enquiries, for example jack@hanntec.com, or a shared inbox such as enquiries@hanntec.com.
+   - If the address isn't a member of the Netlify team, Netlify emails it a confirmation link. Click **Confirm** in that email, or nothing is sent.
+   - Add a second address too, so an enquiry is never sitting in one person's holiday inbox.
+5. Send a test enquiry from the live site. Check that:
+   - it arrives within a minute or two
+   - the subject line reads correctly
+   - pressing Reply addresses the email to the test sender
+6. If the email doesn't arrive, check the junk folder. Mark `formresponses@netlify.com` as a safe sender in Outlook (**Settings > Mail > Junk email > Safe senders**).
+7. In Netlify, look under **Forms > enquiry**. Real enquiries are listed under **Verified submissions**. Anything Akismet flagged is under **Spam submissions**, where it can be marked as not spam.
+
+**Keeping it tidy:**
+- Delete old submissions in Netlify every few months, in line with the privacy notice.
+- Check the spam list now and then for real enquiries that were caught.
+- The form only works on Netlify. On the local preview, or any other host, it shows the "didn't send" message with the phone and email.
 
 Draft notes are no longer shown on the pages. Anything still to confirm is in the checklist below.
 
@@ -91,7 +125,7 @@ Draft notes are no longer shown on the pages. Anything still to confirm is in th
 - [ ] Real photos, team portraits and bios; confirm Jack's title (signatures say "Operations", the old site said "Co-founder and Operations Director")
 - [ ] Client logos (13 on the home page wheel): confirm each company is happy to be shown
 - [ ] "Certified by Safe Electric registered electricians" (services page): confirm it is still true
-- [ ] Connect the contact form (`formEndpoint`) and send a test enquiry
+- [ ] Contact form: do the one-time Netlify setup (see "Contact form") and send a test enquiry from the live site
 - [ ] Privacy notice reviewed
 - [ ] Decide what happens to the old site's Payment Portal and Terms & Conditions pages
 - [ ] Hosting and domain: hanntec.com currently points at the old Squarespace site

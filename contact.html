@@ -67,8 +67,10 @@
       </div>
     </div>
 
-    <form class="form" id="enquiry" data-enquiry novalidate>
+    <form class="form" id="enquiry" name="enquiry" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="website" data-enquiry>
       <h2 class="h-display h-display--sm">Send an enquiry</h2>
+      <input type="hidden" name="form-name" value="enquiry">
+      <input type="hidden" name="subject" value="Website enquiry">
       <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required><p class="field__error" hidden></p></div>
       <div class="field"><label for="f-company">Company <span class="optional">(optional)</span></label><input id="f-company" name="company" autocomplete="organization"></div>
       <div class="field-row">
@@ -80,11 +82,18 @@
         <div class="field"><label for="f-sector">Your sector</label><select id="f-sector" name="sector"><option value="">Other or not listed</option><option value="food-beverage">Food &amp; beverage</option><option value="agriculture">Agriculture</option><option value="construction">Construction</option><option value="energy">Energy, power &amp; renewables</option><option value="life-sciences">Life sciences</option><option value="hospitality">Hospitality</option><option value="healthcare">Healthcare</option></select></div>
       </div>
       <div class="field"><label for="f-message">How can we help?</label><textarea id="f-message" name="message" rows="5" required></textarea><p class="field__error" hidden></p></div>
-      <div class="field field--check"><input id="f-consent" name="consent" type="checkbox" required><label for="f-consent">I agree that Hanntec can use these details to reply to my enquiry. <a href="privacy.html">Privacy notice</a></label><p class="field__error" hidden></p></div>
-      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field field--check"><input id="f-consent" name="consent" type="checkbox" value="Yes" required><label for="f-consent">I agree that Hanntec can use these details to reply to my enquiry. <a href="privacy.html">Privacy notice</a></label><p class="field__error" hidden></p></div>
+      <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
       <button class="btn btn--red" type="submit">Send enquiry</button>
       <p class="form__status" role="status" aria-live="polite"></p>
-      </form>
+    </form>
+    <div class="form form--done" data-enquiry-done tabindex="-1" hidden>
+      <svg class="icon icon--xl" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.8 2.8L16.2 9.6"/></svg>
+      <h2 class="h-display h-display--sm">Thanks<span data-enquiry-name></span>, we have your enquiry</h2>
+      <p>It has gone straight to our engineers and we’ll come back to you shortly. A copy of what you sent is below.</p>
+      <dl class="form__summary" data-enquiry-summary></dl>
+      <p>If it’s urgent, call us on <a href="tel:+353879122237">087 912 2237</a>.</p>
+    </div>
   </div>
 </section>
 </main>

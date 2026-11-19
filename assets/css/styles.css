@@ -542,6 +542,18 @@ dialog.profile::backdrop { background: rgba(4, 18, 43, .72); }
 .form__status { margin: 16px 0 0; font-weight: 600; }
 .form__status.is-ok { color: var(--blue); }
 .form__status.is-error { color: var(--red-hover); }
+.form__status a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
+.form .btn[aria-busy="true"] { cursor: progress; opacity: .75; }
+/* confirmation shown in place of the form once an enquiry is sent */
+.form--done { align-self: start; }
+.form--done:focus { outline: none; }
+.form--done .icon--xl { color: var(--blue); }
+.form--done > p { max-width: 52ch; }
+.form__summary { display: grid; gap: 10px; margin: 22px 0; padding: 18px 20px; background: #fff; border-radius: 12px; border: 1px solid rgba(11, 58, 130, .12); }
+.form__summary div { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; }
+.form__summary dt { font-weight: 600; color: var(--blue); }
+.form__summary dd { margin: 0; white-space: pre-line; overflow-wrap: anywhere; }
+@media (max-width: 520px) { .form__summary div { grid-template-columns: 1fr; gap: 2px; } }
 
 /* ---------- Footer ---------- */
 .site-footer { padding-bottom: 56px; color: #D5E0F2; background: var(--navy-950); } /* bottom space keeps the copyright clear of the draft-notes button */
