@@ -11,7 +11,7 @@ An earlier one-page draft is in `..\hanntec-website`. It has not been touched.
 | --- | --- |
 | `index.html` | Home: hero, the two lead services (ROI analysis & reporting, Engineering advisory), five delivery services, process, sectors, before/after slider, rotating client-logo wheel, call to action |
 | `about.html` | About, **Meet the team** (`#team`), **Core values** (`#values`) |
-| `services.html` | Advice and analysis: ROI analysis & reporting, Engineering advisory. Delivery: Design, Electrical installation & implementation, Mechanical installation & process engineering, Construction, Commissioning |
+| `services.html` | Services by project phase. Pre-project: ROI analysis & reporting, Engineering advisory. Design: Design & engineering. Build: Construction & project management, Electrical installation & implementation, Mechanical installation & process engineering. Commission: Commissioning & start-up. Ends with an A to Z capability index |
 | `sectors.html` | Food & beverage, Agriculture, Construction, Energy/power/renewables, Life sciences, Hospitality, Healthcare |
 | `contact.html` | Enquiry form and contact details |
 | `privacy.html` | Draft privacy notice (have it reviewed before launch) |
@@ -45,7 +45,7 @@ Yellow and grey notes on the pages mark things to finish. The **Draft notes** bu
 
 ## Before launch
 
-- [ ] Confirm the draft wording for ROI analysis & reporting, Engineering advisory and Construction (yellow notes on the Services page)
+- [ ] Confirm the draft wording for ROI analysis & reporting, Engineering advisory and Construction & project management, and prune the "All capabilities" list (yellow notes on the Services page)
 - [ ] Company registration number (a public listing shows 592547, so confirm it on the CRO) and registered office
 - [ ] Each person's LinkedIn profile link (the company link is already set)
 - [ ] Real photos, team portraits and bios; confirm Jack's title (signatures say "Operations", the old site said "Co-founder and Operations Director")
