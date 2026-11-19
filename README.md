@@ -36,7 +36,7 @@ Every photo slot shows a blueprint-style placeholder until a file with the right
 | Service tiles and service pages | Already added: `services/design.jpg`, `electrical.jpg`, `commissioning.jpg`, `mechanical.jpg` (swap for sharper or own photos any time) |
 | Lead service photos (home page cards and Services page) | Already added: `services/roi.jpg`, `services/advisory.jpg` |
 | Sector tiles and sector pages | Already added (7 photos in ``sectors/``, named after each sector). Swap for sharper or own photos any time |
-| Team portraits (square, face centred) | `assets/img/team/jack-walshe.jpg`, `jackie-barden.jpg`, `niamh-kelly.jpg`, `aidan-armstrong.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` |
+| Team portraits (square, face centred) | Jack and Jackie added. Still to come: `assets/img/team/niamh-kelly.jpg`, `ciaran-hickey.jpg`, `niamh-walshe.jpg` (each with a `.webp` copy) |
 
 Photos should be about 1600 px wide and under 400 KB each. Text sits on a dark fade at the bottom of each tile, so most photos work. Add descriptive `alt` text in the HTML when a real photo replaces a placeholder.
 

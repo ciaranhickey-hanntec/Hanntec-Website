@@ -19,7 +19,6 @@
       'jack-walshe': '',
       'jackie-barden': '',
       'niamh-kelly': '',
-      'aidan-armstrong': '',
       'ciaran-hickey': '',
       'niamh-walshe': ''
     }

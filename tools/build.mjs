@@ -152,7 +152,6 @@ const team = [
   { slug: 'jack-walshe', name: 'Jack Walshe', creds: 'BEng MIEI', role: 'Operations', bio: 'Jack leads Hanntec’s operations and looks after clients from first enquiry to final handover.' },
   { slug: 'jackie-barden', name: 'Jackie Barden', creds: 'BSc.', role: 'Senior Project Engineer', bio: 'Jackie leads engineering projects from design through to commissioning.' },
   { slug: 'niamh-kelly', name: 'Niamh Kelly', creds: 'BAI', role: 'Project Engineer', bio: 'Niamh delivers Hanntec’s engineering projects, coordinating design, installation and commissioning.' },
-  { slug: 'aidan-armstrong', name: 'Aidan Armstrong', creds: '', role: 'Site Lead, Operations', bio: 'Aidan runs Hanntec’s work on site, keeping crews safe, projects on programme and standards high.' },
   { slug: 'ciaran-hickey', name: 'Ciaran Hickey', creds: '', role: 'Engineering Assistant', bio: 'Ciaran supports the design and project teams with drawings, documentation and digital tools.' },
   { slug: 'niamh-walshe', name: 'Niamh Walshe', creds: '', role: 'Accounts', bio: 'Niamh looks after Hanntec’s accounts, keeping invoicing and payments running smoothly.' },
 ];
@@ -412,7 +411,7 @@ const about = () => {
   <div class="wrap">
     <div class="section__head">
       <h2 class="h-display">Meet the team</h2>
-      <p class="lead">The engineers, site leads and support team behind every project. Select a name to read more.</p>
+      <p class="lead">The engineers and support team behind every project. Select a name to read more.</p>
     </div>
     <ul class="people">
       ${people}
