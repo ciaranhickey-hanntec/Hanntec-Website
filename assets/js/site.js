@@ -378,7 +378,7 @@
     function validate() {
       var firstBad = null;
       ['name', 'email', 'message', 'consent'].forEach(function (n) {
-        var f = form.elements[n];
+        var f = form.elements[n] || document.getElementById('f-' + n); // the consent box has no name, so it is never sent
         var ok = f.type === 'checkbox' ? f.checked : (f.value.trim() !== '' && f.checkValidity());
         setError(f, ok ? '' : messages[n]);
         if (!ok && !firstBad) firstBad = f;
@@ -443,6 +443,7 @@
       var body = new URLSearchParams(new FormData(form));
       body.set('need', need);       // send the readable names rather than the short codes
       body.set('sector', sector);
+      ['company', 'phone', 'website'].forEach(function (n) { if (!body.get(n)) body.delete(n); }); // keep blank optional fields out of the email
 
       sending = true;
       btn.disabled = true;
