@@ -290,6 +290,19 @@
     raf = requestAnimationFrame(tick);
   })();
 
+  /* ---------- Projects: filter by sector ---------- */
+  (function () {
+    var btns = $$('[data-filter]');
+    if (!btns.length) return;
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var f = b.getAttribute('data-filter');
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+        $$('[data-cases] .case').forEach(function (c) { c.hidden = f !== 'all' && c.getAttribute('data-sector') !== f; });
+      });
+    });
+  })();
+
   /* ---------- Contact form ---------- */
   (function () {
     var form = $('[data-enquiry]');

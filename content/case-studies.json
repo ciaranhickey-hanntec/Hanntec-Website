@@ -1,0 +1,36 @@
+{
+  "_readme": [
+    "One entry per project. Pages are rebuilt with: node tools/build.mjs (run in the site folder).",
+    "draft: true  -> the project gets its own preview page (case-<id>.html) with prompts for missing parts, but is not linked anywhere, not in the sitemap and hidden from search engines.",
+    "draft: false -> the project is published: it appears on the Projects page, on the home page (newest three), in the menu and in the sitemap.",
+    "Leave any field empty (\"\" or []) and it is simply left out of the published page.",
+    "sector must be one of: food-beverage, agriculture, construction, energy, life-sciences, hospitality, healthcare.",
+    "services can include: roi, advisory, design, construction, electrical, mechanical, commissioning.",
+    "figures: the headline numbers, e.g. { \"value\": \"18 months\", \"label\": \"payback on the heat-pump upgrade\" }. Only use figures the client is happy to publish.",
+    "images: paths inside assets/img/. Each .jpg should have a .webp copy beside it. before + after together give a drag slider; card is the photo used on project cards."
+  ],
+  "projects": [
+    {
+      "id": "tirlan-country-life",
+      "draft": true,
+      "title": "New Tirlán Country Life store",
+      "client": "Tirlán",
+      "sector": "construction",
+      "location": "",
+      "year": "",
+      "services": [],
+      "summary": "",
+      "challenge": "",
+      "whatWeDid": [],
+      "result": "",
+      "figures": [],
+      "quote": { "text": "", "name": "", "role": "" },
+      "images": {
+        "card": "assets/img/sectors/construction.jpg",
+        "before": "assets/img/hero/before.jpg",
+        "after": "assets/img/hero/after.jpg",
+        "gallery": []
+      }
+    }
+  ]
+}
