@@ -7,3 +7,52 @@
   for = "/assets/video/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Old Squarespace page addresses (hanntec.com before November 2026) sent to their new pages,
+# so links in Google, old emails and quotes keep working. 301 = moved permanently.
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/about-us"
+  to = "/about.html"
+  status = 301
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact.html"
+  status = 301
+[[redirects]]
+  from = "/technical-services"
+  to = "/services.html"
+  status = 301
+[[redirects]]
+  from = "/structured-cabling-fibre-optics"
+  to = "/services.html#electrical"
+  status = 301
+[[redirects]]
+  from = "/perimeter-security"
+  to = "/services.html"
+  status = 301
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy.html"
+  status = 301
+[[redirects]]
+  from = "/cookies-policy"
+  to = "/privacy.html"
+  status = 301
+# No terms page on the new site yet; change this if one is added.
+[[redirects]]
+  from = "/terms-conditions"
+  to = "/contact.html"
+  status = 301
+# The old security blog was not carried over.
+[[redirects]]
+  from = "/blog"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blog/*"
+  to = "/"
+  status = 301
