@@ -123,7 +123,8 @@ const clients = [
   ['dawn-meats', 'Dawn Meats'], ['frs-direct', 'FRS Direct'], ['tirlan', 'Tirlán'], ['tramore-races', 'Tramore Races'],
   ['fbd-hotels', 'FBD Hotels & Resorts'], ['ifac', 'ifac'], ['morris', 'Morris’s Builders Providers & DIY'], ['hcs', 'hcs'],
   ['horizon', 'Horizon'], ['flahavans', 'Flahavan’s'], ['maryborough-hotel', 'Maryborough Hotel'], ['hallahans', 'Hallahans Family Pharmacy'],
-  ['faithlegg', 'Faithlegg'],
+  ['faithlegg', 'Faithlegg'], ['q1-scientific', 'Q1 Scientific'], ['panasonic', 'Panasonic Heating & Cooling Solutions'],
+  ['kingspan', 'Kingspan'], ['irish-distillers', 'Irish Distillers Pernod Ricard'],
 ];
 
 // alt text for the sector photos (shown on the Sectors page)
@@ -346,7 +347,7 @@ ${cases.published.length ? `<section class="section section--sheet" id="projects
       <h2 class="h-display">Who we work with</h2>
       <p class="lead">Businesses across Ireland that trust us with their projects.</p>
     </div>
-    <div class="wheel" data-wheel role="group" aria-roledescription="carousel" aria-label="Companies we work with. Drag, or use the arrow keys, to turn the wheel." tabindex="0">
+    <div class="wheel" data-wheel style="--n: ${clients.length}" role="group" aria-roledescription="carousel" aria-label="Companies we work with. Drag, or use the arrow keys, to turn the wheel." tabindex="0">
       <ul class="wheel__ring">
         ${wheelItems}
       </ul>

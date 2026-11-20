@@ -416,7 +416,9 @@ button { font: inherit; }
 
 /* ---------- Client wheel (3D ring: drag, arrows, keyboard, auto-turns, pausable) ---------- */
 .wheel {
-  --w: 240px; --h: 136px; --R: 530px; --n: 13; --px: 28px; --py: 22px;
+  --w: 240px; --h: 136px; --n: 13; --px: 28px; --py: 22px;
+  /* ring radius grows with the number of logos (--n is set on the element) so cards never overlap */
+  --R: max(530px, calc(var(--n) * (var(--w) + 20px) / 6.2832));
   position: relative; height: calc(var(--h) + 96px); overflow: hidden; perspective: calc(var(--R) * 3.4);
   cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: var(--r);
 }
@@ -435,8 +437,8 @@ button { font: inherit; }
 .wheel__btn--text { width: auto; padding: 0 1.3em; font: 600 .9375rem/1 var(--font-body); border-radius: 999px; }
 .wheel__btn .icon { width: 22px; height: 22px; }
 .icon--flip { transform: scaleX(-1); }
-@media (max-width: 900px) { .wheel { --w: 200px; --h: 114px; --R: 440px; } }
-@media (max-width: 560px) { .wheel { --w: 168px; --h: 98px; --R: 372px; --px: 20px; --py: 14px; } }
+@media (max-width: 900px) { .wheel { --w: 200px; --h: 114px; --R: max(440px, calc(var(--n) * (var(--w) + 16px) / 6.2832)); } }
+@media (max-width: 560px) { .wheel { --w: 168px; --h: 98px; --R: max(372px, calc(var(--n) * (var(--w) + 14px) / 6.2832)); --px: 20px; --py: 14px; } }
 /* ---------- Call to action ---------- */
 .cta__grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 56px; }
 .cta__grid .h-display { margin-bottom: .2em; }

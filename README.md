@@ -123,7 +123,7 @@ Draft notes are no longer shown on the pages. Anything still to confirm is in th
 - [ ] Company registration number (a public listing shows 592547, so confirm it on the CRO) and registered office
 - [ ] Each person's LinkedIn profile link (the company link is already set)
 - [ ] Real photos, team portraits and bios; confirm Jack's title (signatures say "Operations", the old site said "Co-founder and Operations Director")
-- [ ] Client logos (13 on the home page wheel): confirm each company is happy to be shown
+- [ ] Client logos (17 on the home page wheel): confirm each company is happy to be shown
 - [ ] "Certified by Safe Electric registered electricians" (services page): confirm it is still true
 - [ ] Contact form: do the one-time Netlify setup (see "Contact form") and send a test enquiry from the live site
 - [ ] Privacy notice reviewed
