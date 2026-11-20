@@ -128,7 +128,7 @@ Draft notes are no longer shown on the pages. Anything still to confirm is in th
 - [ ] Contact form: do the one-time Netlify setup (see "Contact form") and send a test enquiry from the live site
 - [ ] Privacy notice reviewed
 - [ ] Decide what happens to the old site's Payment Portal and Terms & Conditions pages
-- [ ] Hosting and domain: hanntec.com currently points at the old Squarespace site
+- [ ] Domain switch: point hanntec.com and www.hanntec.com at Netlify. DNS stays at Hosting Ireland, and only the website records change; never touch the MX, TXT, autodiscover or selector1/selector2 records, which run Microsoft 365 email. Old Squarespace addresses redirect to the new pages through `netlify.toml`. Cancel Squarespace only after the new site is live on hanntec.com.
 - [ ] If Hanntec still installs security systems for clients, the Private Security Authority licence number must be shown wherever that work is advertised
 
 ## Design notes
